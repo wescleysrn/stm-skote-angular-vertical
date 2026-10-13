@@ -11,49 +11,44 @@
     left: 0;
     right: 0;
     z-index: 100;
-
+    
     .topnav-menu {
         margin: 0;
         padding: 0;
     }
 
     .navbar-nav {
-
+        
         .nav-link {
             font-size: 14px;
             position: relative;
             padding: 1rem 1.3rem;
             color: var(--#{$prefix}menu-item-color);
-
-            i {
+            i{
                 font-size: 15px;
             }
-
-            &:focus,
-            &:hover {
+            &:focus, &:hover{
                 color: var(--#{$prefix}menu-item-active-color);
                 background-color: transparent;
             }
         }
-
-        .dropdown-item {
+        
+        .dropdown-item{
             color: var(--#{$prefix}menu-item-color);
-
-            &.active,
-            &:hover {
+            &.active, &:hover{
+                color: var(--#{$prefix}menu-item-active-color);
+            }
+        }
+        
+        .nav-item{
+            .nav-link.active{
                 color: var(--#{$prefix}menu-item-active-color);
             }
         }
 
-        .nav-item {
-            .nav-link.active {
-                color: var(--#{$prefix}menu-item-active-color);
-            }
-        }
-
-        .dropdown {
-            &.active {
-                >a {
+        .dropdown{
+            &.active{
+              >a {
                     color: var(--#{$prefix}menu-item-active-color);
                     background-color: transparent;
                 }
@@ -65,7 +60,6 @@
 @include media-breakpoint-up(xl) {
 
     body[data-layout="horizontal"] {
-
         .container-fluid,
         .navbar-header {
             max-width: 85%;
@@ -91,15 +85,13 @@
         }
 
         .dropdown {
-            &.mega-dropdown {
-
+            &.mega-dropdown{
                 // position: static;
-                .mega-dropdown-menu {
+                .mega-dropdown-menu{
                     left: 0px;
                     right: auto;
                 }
             }
-
             .dropdown-menu {
                 margin-top: 0;
                 border-radius: 0 0 $dropdown-border-radius $dropdown-border-radius;
@@ -117,16 +109,16 @@
                         position: absolute;
                         top: 0 !important;
                         left: 100%;
-                        // display: none
+                        display: none
                     }
                 }
             }
 
-            // &:hover {
-            // >.dropdown-menu {
-            // display: block;
-            // }
-            // }
+            &:hover {
+                >.dropdown-menu {
+                    display: block;
+                }
+            }
         }
 
         .dropdown:hover>.dropdown-menu>.dropdown:hover>.dropdown-menu {
@@ -179,25 +171,23 @@
 
 @include media-breakpoint-down(lg) {
 
-    .navbar-brand-box {
+    .navbar-brand-box{
         .logo-dark {
             display: var(--#{$prefix}display-block);
-
-            span.logo-sm {
+            span.logo-sm{
                 display: var(--#{$prefix}display-block);
             }
         }
-
+    
         .logo-light {
             display: var(--#{$prefix}display-none);
         }
     }
-
+    
     .topnav {
         max-height: 360px;
         overflow-y: auto;
         padding: 0;
-
         .navbar-nav {
             .nav-link {
                 padding: 0.75rem 1.1rem;
@@ -210,11 +200,10 @@
                 border: none;
                 box-shadow: none;
                 padding-left: 15px;
-
-                &.dropdown-mega-menu-xl {
+                &.dropdown-mega-menu-xl{
                     width: auto;
-
-                    .row {
+    
+                    .row{
                         margin: 0px;
                     }
                 }
@@ -244,33 +233,31 @@
 @include media-breakpoint-up(lg) {
 
     body[data-layout="horizontal"][data-topbar="light"] {
-        .navbar-brand-box {
+        .navbar-brand-box{
             .logo-dark {
                 display: var(--#{$prefix}display-block);
             }
-
+        
             .logo-light {
                 display: var(--#{$prefix}display-none);
             }
         }
 
-        .topnav {
+        .topnav{
             background-color: $primary;
-
             .navbar-nav {
-
+        
                 .nav-link {
                     color: rgba($white, 0.6);
-
-                    &:focus,
-                    &:hover {
+                    
+                    &:focus, &:hover{
                         color: rgba($white, 0.9);
                     }
                 }
-
-                >.dropdown {
-                    &.active {
-                        >a {
+        
+                > .dropdown{
+                    &.active{
+                    >a {
                             color: rgba($white, 0.9) !important;
                         }
                     }
@@ -283,7 +270,7 @@
 // Colored Topbar 
 
 body[data-layout="horizontal"][data-topbar="colored"] {
-    #page-topbar {
+    #page-topbar{
         background-color: $primary;
         box-shadow: none;
     }
@@ -297,21 +284,19 @@ body[data-layout="horizontal"][data-topbar="colored"] {
     }
 
     .app-search {
-
+    
         .form-control {
-            background-color: rgba(var(--#{$prefix}topbar-search-bg), 0.07);
+            background-color: rgba(var(--#{$prefix}topbar-search-bg),0.07);
             color: $white;
         }
-
         span,
         input.form-control::-webkit-input-placeholder {
-            color: rgba($white, 0.5);
+            color: rgba($white,0.5);
         }
     }
-
     .header-item {
         color: var(--#{$prefix}header-dark-item-color);
-
+    
         &:hover {
             color: var(--#{$prefix}header-dark-item-color);
         }
@@ -319,8 +304,8 @@ body[data-layout="horizontal"][data-topbar="colored"] {
 
     .navbar-header {
         .dropdown .show {
-            &.header-item {
-                background-color: rgba($white, 0.1);
+            &.header-item{
+                background-color: rgba($white,0.1);
             }
         }
 
@@ -336,23 +321,21 @@ body[data-layout="horizontal"][data-topbar="colored"] {
     }
 
     @include media-breakpoint-up(lg) {
-        .topnav {
+        .topnav{
             background-color: $primary;
-
             .navbar-nav {
-
+        
                 .nav-link {
                     color: rgba($white, 0.6);
-
-                    &:focus,
-                    &:hover {
+                    
+                    &:focus, &:hover{
                         color: rgba($white, 0.9);
                     }
                 }
-
-                >.dropdown {
-                    &.active {
-                        >a {
+        
+                > .dropdown{
+                    &.active{
+                      >a {
                             color: rgba($white, 0.9) !important;
                         }
                     }
@@ -361,3 +344,4 @@ body[data-layout="horizontal"][data-topbar="colored"] {
         }
     }
 }
+

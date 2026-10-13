@@ -16,7 +16,7 @@
     bottom: 0;
 
     .right-bar-toggle {
-        background-color: #343a40;
+        background-color: var(--#{$prefix}dark);
         height: 24px;
         width: 24px;
         line-height: 24px;
@@ -26,7 +26,7 @@
         border-radius: 50%;
 
         &:hover {
-            background-color: var(--#{$prefix}secondary-bg);
+            background-color: var(--#{$prefix}dark);
         }
     }
 }
@@ -48,7 +48,6 @@
     .right-bar {
         right: 0;
     }
-
     .rightbar-overlay {
         display: block;
     }
@@ -57,7 +56,6 @@
 @include media-breakpoint-down(md) {
     .right-bar {
         overflow: auto;
-
         .slimscroll-menu {
             height: auto !important;
         }

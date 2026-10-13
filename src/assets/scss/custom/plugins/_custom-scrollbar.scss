@@ -49,16 +49,12 @@
   box-sizing: border-box !important;
   position: relative;
   display: block;
-  height: 100%;
-  /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
+  height: 100%; /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
   width: auto;
   visibility: visible;
-  overflow: auto;
-  /* Scroll on this element otherwise element can't have a padding applied properly */
-  max-width: 100%;
-  /* Not required for horizontal scroll to trigger */
-  max-height: 100%;
-  /* Needed for vertical scroll to trigger */
+  overflow: auto; /* Scroll on this element otherwise element can't have a padding applied properly */
+  max-width: 100%; /* Not required for horizontal scroll to trigger */
+  max-height: 100%; /* Needed for vertical scroll to trigger */
   scrollbar-width: none;
   padding: 0px !important;
 }
@@ -136,11 +132,9 @@
 
 .simplebar-scrollbar {
   position: absolute;
-  right: -5px;
+  right: 2px;
   width: 4px;
   min-height: 10px;
-  background-color: #74788d;
-  border-radius: 10px;
 }
 
 .simplebar-scrollbar:before {

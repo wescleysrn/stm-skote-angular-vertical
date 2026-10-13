@@ -19,9 +19,7 @@
     align-items: center;
     margin: 0 auto;
     height: $header-height;
-    padding: 0 calc(#{$grid-gutter-width} * 0.5) 0 0
-    /*rtl: 0 0 0 calc(#{$grid-gutter-width} / 2) */
-    ;
+    padding: 0 calc(#{$grid-gutter-width} * 0.5) 0 0 /*rtl: 0 0 0 calc(#{$grid-gutter-width} / 2) */;
 
     .dropdown .show {
         &.header-item {
@@ -62,7 +60,6 @@
         box-shadow: none;
         border-radius: 30px;
     }
-
     span {
         position: absolute;
         z-index: 10;
@@ -77,11 +74,10 @@
 // Mega menu
 
 .megamenu-list {
-    li {
+    li{
         position: relative;
         padding: 5px 0px;
-
-        a {
+        a{
             color: var(--#{$prefix}body-color);
         }
     }
@@ -136,6 +132,7 @@
     .badge {
         position: absolute;
         top: 12px;
+        right: 4px;
     }
 }
 
@@ -180,16 +177,23 @@
 .fullscreen-enable {
     [data-bs-toggle="fullscreen"] {
         .bx-fullscreen::before {
-            content: "\ea3f";
+            content: "\eacb";
+        }
+    }
+}
+
+[data-bs-theme="dark"]{
+    .light-dark-mode {
+        .bx-moon::before {
+            content: "\ec34";
         }
     }
 }
 
 body[data-topbar="dark"] {
-    #page-topbar {
+    #page-topbar { 
         background-color: var(--#{$prefix}header-dark-bg);
     }
-
     .navbar-header {
         .dropdown .show {
             &.header-item {
@@ -204,7 +208,7 @@ body[data-topbar="dark"] {
 
     .header-item {
         color: var(--#{$prefix}header-dark-item-color);
-
+    
         &:hover {
             color: var(--#{$prefix}header-dark-item-color);
         }
@@ -213,7 +217,7 @@ body[data-topbar="dark"] {
     .header-profile-user {
         background-color: rgba($white, 0.25);
     }
-
+    
     .noti-icon {
         i {
             color: var(--#{$prefix}header-dark-item-color);
@@ -229,15 +233,14 @@ body[data-topbar="dark"] {
     }
 
     .app-search {
-
+    
         .form-control {
-            background-color: rgba(var(--#{$prefix}topbar-search-bg), 0.07);
+            background-color: rgba(var(--#{$prefix}topbar-search-bg),0.07);
             color: $white;
         }
-
         span,
         input.form-control::-webkit-input-placeholder {
-            color: rgba($white, 0.5);
+            color: rgba($white,0.5);
         }
     }
 }
@@ -279,17 +282,16 @@ body[data-layout="horizontal"] {
     .navbar-brand-box {
         width: auto;
     }
-
     .page-content {
         margin-top: $header-height;
         padding: calc(55px + #{$grid-gutter-width}) calc(#{$grid-gutter-width} * 0.5) $footer-height calc(#{$grid-gutter-width} * 0.5);
-    }
+    }    
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px) { 
     body[data-layout="horizontal"] {
         .page-content {
             margin-top: 15px;
-        }
+        }    
     }
 }

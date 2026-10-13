@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @Component({
-  selector: 'app-steptwoverification',
-  templateUrl: './steptwoverification.component.html',
-  styleUrls: ['./steptwoverification.component.scss']
+    selector: 'app-steptwoverification',
+    templateUrl: './steptwoverification.component.html',
+    styleUrls: ['./steptwoverification.component.scss'],
+    imports: [NgOtpInputModule]
 })
 export class SteptwoverificationComponent implements OnInit {
 

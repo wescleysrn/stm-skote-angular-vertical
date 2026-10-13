@@ -7,12 +7,14 @@ import { changeLayoutWidth, changeMode, changeSidebarMode } from 'src/app/store/
 import { getLayoutMode, getLayoutWidth, getsidebar } from 'src/app/store/layouts/layout.selector';
 import { RootReducerState } from 'src/app/store';
 import { changesLayout } from 'src/app/store/layouts/layout.actions';
+import { SimplebarAngularModule } from 'simplebar-angular';
 // import { RootReducerState } from 'src/app/store';
 
 @Component({
-  selector: 'app-rightsidebar',
-  templateUrl: './rightsidebar.component.html',
-  styleUrls: ['./rightsidebar.component.scss']
+    selector: 'app-rightsidebar',
+    templateUrl: './rightsidebar.component.html',
+    styleUrls: ['./rightsidebar.component.scss'],
+    imports: [SimplebarAngularModule]
 })
 
 /**

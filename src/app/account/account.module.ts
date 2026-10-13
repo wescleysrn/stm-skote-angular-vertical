@@ -7,8 +7,8 @@ import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     AccountRoutingModule,
+    CommonModule,
     AuthModule
   ]
 })

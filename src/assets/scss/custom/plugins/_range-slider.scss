@@ -2,26 +2,60 @@
 // Range slider
 //
 
-
-.ngx-slider {
-  .ngx-slider-pointer {
-    position: absolute !important;
-    display: block !important;
-    transform: rotate(45deg) !important;
-    border: 2px solid #556ee6 !important;
-    border-radius: 0% !important;
-    width: 12px !important;
-    height: 12px !important;
-    top: -4px !important;
-    background-color: var(--bs-secondary-bg) !important;
-    cursor: pointer;
-  }
-
-  .ngx-slider-bubble {
-    font-size: 0.8125rem !important;
-  }
+.irs {
+  font-family: $font-family-base;
 }
 
-.ngx-slider.animate .ngx-slider-selection {
-  background-color: #556ee6 !important;
+.irs--square {
+  cursor: pointer;
+
+  .irs-bar,
+  .irs-to,
+  .irs-from,
+  .irs-single {
+    background: $primary  !important;
+    font-size: 11px;
+  }
+
+  .irs-to,
+  .irs-from,
+  .irs-single {
+    &:before {
+      border-top-color: $primary;
+    }
+  }
+
+  .irs-line {
+    background: var(--#{$prefix}tertiary-bg);
+    border-color: var(--#{$prefix}tertiary-bg);
+  }
+
+  .irs-grid-text {
+    font-size: 11px;
+    color: var(--#{$prefix}secondary-color);
+  }
+
+  .irs-min,
+  .irs-max {
+    color: var(--#{$prefix}secondary-color);
+    background: var(--#{$prefix}tertiary-bg);
+    font-size: 11px;
+  }
+
+  .irs-handle {
+    border: 2px solid $primary;
+    width: 12px;
+    height: 12px;
+    top: 26px;
+    background-color: var(--#{$prefix}secondary-bg) !important;
+    cursor: pointer;
+
+    &:active {
+      cursor: pointer;
+    }
+  }
+
+  .irs-grid-pol {
+    background-color: var(--#{$prefix}secondary-color);
+  }
 }

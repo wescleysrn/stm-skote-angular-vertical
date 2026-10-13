@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
 import { login } from 'src/app/store/Authentication/authentication.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { CommonModule } from '@angular/common';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @Component({
-  selector: 'app-login2',
-  templateUrl: './login2.component.html',
-  styleUrls: ['./login2.component.scss']
+    selector: 'app-login2',
+    templateUrl: './login2.component.html',
+    styleUrls: ['./login2.component.scss'],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule,SlickCarouselModule]
 })
 /**
  * Login-2 component

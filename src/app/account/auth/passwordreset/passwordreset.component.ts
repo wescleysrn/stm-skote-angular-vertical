@@ -1,14 +1,16 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-passwordreset',
-  templateUrl: './passwordreset.component.html',
-  styleUrls: ['./passwordreset.component.scss']
+    selector: 'app-passwordreset',
+    templateUrl: './passwordreset.component.html',
+    styleUrls: ['./passwordreset.component.scss'],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
 
 /**

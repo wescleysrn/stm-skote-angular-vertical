@@ -39,7 +39,7 @@ input[type="checkbox"].tui-full-calendar-checkbox-round+span {
     height: 30px;
     line-height: 28px;
     border-radius: 4px;
-    background-color: var(--#{$prefix}custom-white);
+    background-color: var(--#{$prefix}secondary-bg) !important;
     color: var(--#{$prefix}body-color);
     border-color: var(--#{$prefix}border-color);
 }
@@ -49,15 +49,20 @@ input[type="checkbox"].tui-full-calendar-checkbox-round+span {
 }
 
 .tui-full-calendar-weekday-schedule-title {
-    color: var(--#{$prefix}emphasis-color) !important;
 
     .tui-full-calendar-time-schedule {
         font-weight: $font-weight-semibold;
     }
 }
 
+[data-bs-theme="dark"] {
+    .tui-full-calendar-weekday-schedule-title {
+        color: var(--#{$prefix}emphasis-color) !important;
+    }
+}
+
 .tui-full-calendar-popup-container {
-    background-color: var(--#{$prefix}custom-white) !important;
+    background-color: var(--#{$prefix}secondary-bg) !important;
     border-color: var(--#{$prefix}border-color) !important;
 }
 

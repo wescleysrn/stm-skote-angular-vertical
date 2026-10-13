@@ -2,19 +2,45 @@
 // Form editors.scss
 //
 
-// Tinymce
 
+.ql-toolbar,
+.ql-container {
+    font-family: $font-family-base !important;
+}
+.ql-toolbar,
+.ql-snow {
+    border-color: var(--#{$prefix}border-color) !important;
+}
+
+.ql-snow .ql-stroke,
+.ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+    stroke: var(--#{$prefix}body-color);
+}
+
+.ql-snow .ql-picker {
+    color: var(--#{$prefix}body-color);
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+    border-color: transparent !important;
+}
+
+.ql-snow .ql-picker-options {
+    background-color: var(--#{$prefix}secondary-bg) !important;
+    border-color: var(--#{$prefix}border-color) !important;
+}
+
+
+// Tinymce
 form {
     .tox-tinymce {
-        border: 1px solid $border-color-translucent;
+        border: 1px solid $border-color !important;
     }
 
+    .tox-toolbar-overlord {
+        background-color: var(--#{$prefix}secondary-bg) !important;
+    }
     .tox {
-
-        :not(svg):not(rect) {
-            color: $body-color;
-        }
-
         &:not(.tox-tinymce-inline) {
             .tox-editor-header {
                 box-shadow: var(--#{$prefix}box-shadow);
@@ -30,7 +56,6 @@ form {
         }
 
         .tox-tbtn {
-
             &:hover {
                 color: $body-tertiary-color;
                 background-color: $body-tertiary-bg;
@@ -48,21 +73,4 @@ form {
             background-color: $body-tertiary-bg;
         }
     }
-}
-
-.ck-reset,.ck-input{
-    background-color: var(--#{$prefix}secondary-bg) !important;
-    border-color: var(--#{$prefix}border-color) !important;
-}
-
-.ck-link-form{
-    background-color: var(--#{$prefix}secondary-bg) !important;
-    border-color: var(--#{$prefix}border-color) !important;
-}
-.ck.ck-balloon-panel{
-    border-color: var(--#{$prefix}border-color) !important;
-}
-
-.ck.ck-balloon-panel[class*=arrow_n]:after{
-    border-color: var(--#{$prefix}border-color) !important;
 }

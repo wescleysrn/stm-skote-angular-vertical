@@ -13,39 +13,34 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { LightboxModule } from 'ngx-lightbox';
 
-import { WidgetModule } from '../shared/widget/widget.module';
-import { UIModule } from '../shared/ui/ui.module';
-
 // Emoji Picker
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 import { PagesRoutingModule } from './pages-routing.module';
 
 import { DashboardsModule } from './dashboards/dashboards.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    FormsModule,
-    BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
-    PagesRoutingModule,
-    NgApexchartsModule,
-    ReactiveFormsModule,
-    DashboardsModule,
-    HttpClientModule,
-    UIModule,
-    WidgetModule,
-    FullCalendarModule,
-    TabsModule.forRoot(),
-    TooltipModule.forRoot(),
-    CollapseModule.forRoot(),
-    AlertModule.forRoot(),
-    SimplebarAngularModule,
-    LightboxModule,
-    PickerModule
-  ],
-})
+@NgModule(
+        {
+                declarations: [],
+                imports: [
+                        CommonModule,
+                        FormsModule,
+                        BsDropdownModule.forRoot(),
+                        ModalModule.forRoot(),
+                        PagesRoutingModule,
+                        NgApexchartsModule,
+                        ReactiveFormsModule,
+                        DashboardsModule,
+                        FullCalendarModule,
+                        TabsModule.forRoot(),
+                        TooltipModule.forRoot(),
+                        CollapseModule.forRoot(),
+                        AlertModule.forRoot(),
+                        SimplebarAngularModule,
+                        LightboxModule,
+                        PickerModule],
+                providers: [provideHttpClient(withInterceptorsFromDi())]
+        })
 export class PagesModule { }

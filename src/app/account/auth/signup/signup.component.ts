@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from '../../../core/services/auth.service';
@@ -8,11 +8,13 @@ import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
 import { Store } from '@ngrx/store';
 import { Register } from 'src/app/store/Authentication/authentication.actions';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.scss'],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class SignupComponent implements OnInit {
 

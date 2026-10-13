@@ -1,14 +1,19 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 
 import { EventService } from '../../core/services/event.service';
+import { RightsidebarComponent } from '../rightsidebar/rightsidebar.component';
+import { FooterComponent } from '../footer/footer.component';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 // import { SIDEBAR_TYPE } from "../layouts.model";
 
 @Component({
-  selector: 'app-vertical',
-  templateUrl: './vertical.component.html',
-  styleUrls: ['./vertical.component.scss']
+    selector: 'app-vertical',
+    templateUrl: './vertical.component.html',
+    styleUrls: ['./vertical.component.scss'],
+    imports: [RouterModule, RightsidebarComponent, FooterComponent, TopbarComponent, SidebarComponent]
 })
 
 /**

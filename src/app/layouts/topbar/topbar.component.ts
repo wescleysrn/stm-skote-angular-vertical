@@ -1,22 +1,25 @@
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, DOCUMENT } from '@angular/core';
 import { Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { changesLayout } from 'src/app/store/layouts/layout.actions';
 import { getLayoutMode } from 'src/app/store/layouts/layout.selector';
 import { RootReducerState } from 'src/app/store';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 @Component({
-  selector: 'app-topbar',
-  templateUrl: './topbar.component.html',
-  styleUrls: ['./topbar.component.scss']
+    selector: 'app-topbar',
+    templateUrl: './topbar.component.html',
+    styleUrls: ['./topbar.component.scss'],
+    imports: [CommonModule, TranslateModule, BsDropdownModule, SimplebarAngularModule]
 })
 
 /**

@@ -2,14 +2,19 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { EventService } from '../core/services/event.service';
 import { RootReducerState } from '../store';
-import { Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { LayoutState } from '../store/layouts/layouts.reducer';
 import { Observable, map } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { VerticalComponent } from './vertical/vertical.component';
+import { HorizontalComponent } from './horizontal/horizontal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+    selector: 'app-layout',
+    templateUrl: './layout.component.html',
+    styleUrls: ['./layout.component.scss'],
+    imports: [CommonModule, VerticalComponent, HorizontalComponent]
 })
 
 export class LayoutComponent implements OnInit, AfterViewInit {

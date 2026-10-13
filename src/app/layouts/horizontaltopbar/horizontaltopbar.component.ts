@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Inject, ViewChild, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, ViewChild, Input, ElementRef, DOCUMENT } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import MetisMenu from 'metismenujs';
 import { CookieService } from 'ngx-cookie-service';
@@ -8,16 +8,18 @@ import { EventService } from '../../core/services/event.service';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 
-import { DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { environment } from '../../../environments/environment';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-horizontaltopbar',
-  templateUrl: './horizontaltopbar.component.html',
-  styleUrls: ['./horizontaltopbar.component.scss']
+    selector: 'app-horizontaltopbar',
+    templateUrl: './horizontaltopbar.component.html',
+    styleUrls: ['./horizontaltopbar.component.scss'],
+    imports: [CommonModule, TranslateModule]
 })
 
 /**

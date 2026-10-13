@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
+import { CommonModule } from '@angular/common';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @Component({
-  selector: 'app-recoverpwd2',
-  templateUrl: './recoverpwd2.component.html',
-  styleUrls: ['./recoverpwd2.component.scss']
+    selector: 'app-recoverpwd2',
+    templateUrl: './recoverpwd2.component.html',
+    styleUrls: ['./recoverpwd2.component.scss'],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule,SlickCarouselModule]
 })
 export class Recoverpwd2Component implements OnInit {
 

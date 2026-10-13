@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-comingsoon',
-  templateUrl: './comingsoon.component.html',
-  styleUrls: ['./comingsoon.component.scss']
+    selector: 'app-comingsoon',
+    templateUrl: './comingsoon.component.html',
+    styleUrls: ['./comingsoon.component.scss'],
+    imports: [RouterModule]
 })
 
 /**

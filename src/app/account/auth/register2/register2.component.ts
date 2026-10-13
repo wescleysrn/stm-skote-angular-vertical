@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from '../../../core/services/auth.service';
@@ -8,11 +8,14 @@ import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
 import { Store } from '@ngrx/store';
 import { Register } from 'src/app/store/Authentication/authentication.actions';
+import { CommonModule } from '@angular/common';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @Component({
-  selector: 'app-register2',
-  templateUrl: './register2.component.html',
-  styleUrls: ['./register2.component.scss']
+    selector: 'app-register2',
+    templateUrl: './register2.component.html',
+    styleUrls: ['./register2.component.scss'],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule,SlickCarouselModule]
 })
 export class Register2Component implements OnInit {
 

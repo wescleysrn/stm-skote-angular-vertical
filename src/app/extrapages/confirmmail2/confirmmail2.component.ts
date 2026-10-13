@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @Component({
-  selector: 'app-confirmmail2',
-  templateUrl: './confirmmail2.component.html',
-  styleUrls: ['./confirmmail2.component.scss']
+    selector: 'app-confirmmail2',
+    templateUrl: './confirmmail2.component.html',
+    styleUrls: ['./confirmmail2.component.scss'],
+    imports: [SlickCarouselModule]
 })
 export class Confirmmail2Component implements OnInit {
 
