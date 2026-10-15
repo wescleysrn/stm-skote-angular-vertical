@@ -1,0 +1,98 @@
+.ibge-page {
+  .mini-stat h4 {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .linha-municipio {
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--bs-primary);
+      outline-offset: -2px;
+    }
+  }
+
+  .detalhe {
+    position: sticky;
+    top: 90px; // abaixo do topbar do Skote
+    min-height: 320px;
+  }
+
+  /* Linha do tempo vertical: Região → UF → Meso → Micro → Município */
+  .hierarquia {
+    position: relative;
+    margin: 0;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--bs-border-color);
+
+    li {
+      position: relative;
+      padding: 0.35rem 0 0.35rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: calc(-1.5rem - 6px);
+        top: 0.95rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--bs-body-bg);
+        border: 2px solid var(--bs-border-color);
+      }
+
+      &.atual::before {
+        background: var(--bs-primary);
+        border-color: var(--bs-primary);
+      }
+    }
+
+    .nivel {
+      font-size: 0.75rem;
+      color: var(--bs-secondary-color);
+    }
+
+    .valor {
+      font-weight: 500;
+    }
+
+    .atual .valor {
+      font-weight: 700;
+      color: var(--bs-primary);
+    }
+  }
+
+  .seta {
+    transition: transform 0.15s ease;
+
+    &.aberta {
+      transform: rotate(180deg);
+    }
+  }
+
+  .subdistritos {
+    margin-left: 0.75rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--bs-border-color);
+
+    .sub-item {
+      padding: 0.2rem 0;
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 1199.98px) {
+    .detalhe {
+      position: static;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .seta {
+      transition: none;
+    }
+  }
+
+}

@@ -1,21 +1,272 @@
-
-<div class="container-fluid">
-    <!-- start page title -->
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0 font-size-18">Dashboard</h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <ng-container>
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a>
-                            </li>
-                            <li class="breadcrumb-item active">Dashboard
-                            </li>
-                        </ng-container>
-                    </ol>
-                </div>
-            </div>
-        </div>
+<div class="container-fluid ibge-page">
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+        <h4 class="mb-sm-0 font-size-18">Localização IBGE</h4>
+        <p class="text-muted mb-0 small">Dados do serviço STM Localização IBGE</p>
+      </div>
     </div>
+  </div>
+
+  @if (erro()) {
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ erro() }}
+      <button type="button" class="btn-close" aria-label="Fechar" (click)="erro.set(null)"></button>
+    </div>
+  }
+
+  <!-- ===================== Filtros ===================== -->
+  <div class="card">
+    <div class="card-body">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-6 col-xl-2">
+          <label class="form-label" for="regiao">Região</label>
+          <ng-select
+            inputId="regiao"
+            [items]="regioes()"
+            bindLabel="nome"
+            bindValue="sigla"
+            placeholder="Todas"
+            [ngModel]="regiaoSel()"
+            (ngModelChange)="onRegiaoChange($event)"
+          />
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <label class="form-label" for="uf">Estado (UF)</label>
+          <ng-select
+            inputId="uf"
+            [items]="ufs()"
+            bindLabel="nome"
+            bindValue="sigla"
+            placeholder="Selecione a UF"
+            [loading]="loadingUfs()"
+            [ngModel]="ufSel()"
+            (ngModelChange)="onUfChange($event)"
+          />
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <label class="form-label" for="municipio">Município</label>
+          <ng-select
+            inputId="municipio"
+            [items]="municipios()"
+            bindLabel="nome"
+            bindValue="codigoIBGE"
+            placeholder="{{ ufSel() ? 'Digite para buscar' : 'Escolha uma UF primeiro' }}"
+            [disabled]="!ufSel()"
+            [loading]="loadingMun()"
+            [virtualScroll]="true"
+            [ngModel]="municipioSel()"
+            (ngModelChange)="onMunicipioChange($event)"
+          />
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <label class="form-label" for="codigo">Buscar por código IBGE</label>
+          <div class="input-group">
+            <input
+              id="codigo"
+              class="form-control"
+              inputmode="numeric"
+              placeholder="Ex.: 3170206"
+              [(ngModel)]="codigoBusca"
+              (keyup.enter)="buscarPorCodigo()"
+            />
+            <button class="btn btn-primary" type="button" (click)="buscarPorCodigo()">Buscar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- ===================== Coluna esquerda: UF + tabela ===================== -->
+    <div class="col-xl-7">
+      @if (ufAtual(); as uf) {
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card mini-stat">
+              <div class="card-body">
+                <p class="text-muted mb-1">Municípios</p>
+                <h4 class="mb-0">{{ municipios().length }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card mini-stat">
+              <div class="card-body">
+                <p class="text-muted mb-1">Microrregiões</p>
+                <h4 class="mb-0">{{ qtdMicro() }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card mini-stat">
+              <div class="card-body">
+                <p class="text-muted mb-1">Mesorregiões</p>
+                <h4 class="mb-0">{{ qtdMeso() }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+              <div>
+                <h5 class="card-title mb-0">Municípios de {{ uf.nome }} ({{ uf.sigla }})</h5>
+                <small class="text-muted">
+                  {{ uf.regiao?.nome }} · código IBGE {{ uf.codigoIBGE }}
+                </small>
+              </div>
+              <input
+                type="search"
+                class="form-control w-auto"
+                placeholder="Filtrar por nome ou código"
+                aria-label="Filtrar municípios"
+                [ngModel]="filtro()"
+                (ngModelChange)="onFiltro($event)"
+              />
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>Município</th>
+                    <th>Código IBGE</th>
+                    <th>Microrregião</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (m of paginados(); track m.codigoIBGE) {
+                    <tr
+                      class="linha-municipio"
+                      [class.table-active]="m.codigoIBGE === municipioSel()"
+                      tabindex="0"
+                      (click)="selecionarDaTabela(m)"
+                      (keyup.enter)="selecionarDaTabela(m)"
+                    >
+                      <td class="fw-medium">{{ m.nome }}</td>
+                      <td><code>{{ m.codigoIBGECompleto || m.codigoIBGE }}</code></td>
+                      <td class="text-muted">{{ m.microRegiao?.nome || '—' }}</td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="3" class="text-center text-muted py-4">
+                        @if (loadingMun()) { Carregando municípios… } @else { Nenhum município encontrado para o filtro. }
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between mt-3">
+              <small class="text-muted">{{ filtrados().length }} resultado(s)</small>
+              <div class="btn-group btn-group-sm" role="group" aria-label="Paginação">
+                <button class="btn btn-outline-secondary" [disabled]="pagina() === 1" (click)="irPara(pagina() - 1)">Anterior</button>
+                <button class="btn btn-outline-secondary" disabled>{{ pagina() }} / {{ totalPaginas() }}</button>
+                <button class="btn btn-outline-secondary" [disabled]="pagina() === totalPaginas()" (click)="irPara(pagina() + 1)">Próxima</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <div class="card">
+          <div class="card-body text-center text-muted py-5">
+            <h5 class="mb-1">Escolha uma UF</h5>
+            <p class="mb-0">Selecione a região e o estado acima para listar os municípios, ou busque direto pelo código IBGE.</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- ===================== Coluna direita: detalhe ===================== -->
+    <div class="col-xl-5">
+      <div class="card detalhe">
+        <div class="card-body">
+          @if (loadingDetalhe()) {
+            <div class="text-center py-5">
+              <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando…</span></div>
+            </div>
+          } @else if (detalhe(); as m) {
+            <h4 class="mb-1">{{ m.nome }}</h4>
+            <p class="text-muted mb-3">
+              Código IBGE <code>{{ m.codigoIBGECompleto || m.codigoIBGE }}</code>
+              @if (m.idSei) { · ID SEI {{ m.idSei }} }
+            </p>
+
+            <!-- Hierarquia territorial -->
+            <ol class="hierarquia list-unstyled">
+              <li>
+                <span class="nivel">Região</span>
+                <span class="valor">{{ m.uf?.regiao?.nome || '—' }}</span>
+              </li>
+              <li>
+                <span class="nivel">UF</span>
+                <span class="valor">{{ m.uf?.nome || '—' }} ({{ m.uf?.sigla }})</span>
+              </li>
+              <li>
+                <span class="nivel">Mesorregião</span>
+                <span class="valor">{{ m.microRegiao?.mesoRegiao?.nome || '—' }}</span>
+              </li>
+              <li>
+                <span class="nivel">Microrregião</span>
+                <span class="valor">{{ m.microRegiao?.nome || '—' }}</span>
+              </li>
+              <li class="atual">
+                <span class="nivel">Município</span>
+                <span class="valor">{{ m.nome }}</span>
+              </li>
+            </ol>
+
+            <!-- Distritos e subdistritos -->
+            <h6 class="mt-4 mb-2">Distritos ({{ distritos().length }})</h6>
+            @if (distritos().length === 0) {
+              <p class="text-muted small mb-0">Este município não possui distritos cadastrados.</p>
+            } @else {
+              <ul class="list-group list-group-flush">
+                @for (d of distritos(); track d.codigoIBGE) {
+                  <li class="list-group-item px-0">
+                    <button
+                      type="button"
+                      class="btn btn-link text-start text-decoration-none w-100 d-flex justify-content-between p-0"
+                      [attr.aria-expanded]="distritoAberto() === d.codigoIBGE"
+                      (click)="toggleDistrito(d)"
+                    >
+                      <span>{{ d.nome }} <small class="text-muted">· {{ d.codigoIBGECompleto || d.codigoIBGE }}</small></span>
+                      <span class="seta" [class.aberta]="distritoAberto() === d.codigoIBGE" aria-hidden="true">&#9662;</span>
+                    </button>
+
+                    @if (distritoAberto() === d.codigoIBGE) {
+                      <div class="subdistritos mt-2">
+                        @if (loadingSub() === d.codigoIBGE) {
+                          <small class="text-muted">Carregando subdistritos…</small>
+                        } @else {
+                          @for (s of subdistritos()[d.codigoIBGE]; track s.codigoIBGE) {
+                            <div class="sub-item">
+                              {{ s.nome }} <small class="text-muted">· {{ s.codigoIBGECompleto || s.codigoIBGE }}</small>
+                            </div>
+                          } @empty {
+                            <small class="text-muted">Sem subdistritos.</small>
+                          }
+                        }
+                      </div>
+                    }
+                  </li>
+                }
+              </ul>
+            }
+          } @else {
+            <div class="text-center text-muted py-5">
+              <h5 class="mb-1">Nenhum município selecionado</h5>
+              <p class="mb-0">Clique em uma linha da tabela ou escolha no filtro para ver a hierarquia territorial, distritos e subdistritos.</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
